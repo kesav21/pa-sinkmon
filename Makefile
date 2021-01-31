@@ -13,6 +13,13 @@ obj/callbacks.o: src/callbacks.c src/data.h src/utils.h src/callbacks.h
 obj/utils.o: src/utils.c src/utils.h
 	$(CC) $< -c -o $@
 
-.PHONY: clean install
+.PHONY: clean install uninstall
+
 clean:
 	rm obj/*.o
+
+install:
+	ln -svf `pwd`/bin ~/.local/bin/audio
+
+uninstall:
+	unlink ~/.local/bin/audio
