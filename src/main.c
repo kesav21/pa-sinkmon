@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	my_signal = pa_signal_new(SIGINT, exit_signal_callback, pa);
 	signal(SIGPIPE, SIG_IGN);
 
-	context = pa_context_new(mainloop_api, "PulseAudio Test");
+	context = pa_context_new(mainloop_api, "PulseAudio Sink Monitor");
 	pa_context_connect(context, NULL, PA_CONTEXT_NOAUTOSPAWN, NULL);
 	pa_context_set_state_callback(context, context_state_callback, pa);
 

@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-lm -D_REENTRANT -lpulse -pthread
 
-bin/pulsetest: src/obj/main.o src/obj/callbacks.o src/obj/utils.o
+bin/sinkmon: src/obj/main.o src/obj/callbacks.o src/obj/utils.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 src/obj/main.o: src/main.c src/data.h src/callbacks.h

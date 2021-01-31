@@ -1,7 +1,7 @@
 
-# PulseTest
+# PulseAudio Sink Monitor
 
-PulseTest is a collection of scripts I use to control anything relating to audio on my machines.
+This project contains a program and a collection of scripts I use to monitor the different sinks connected to my computer.
 The daemon, written in C, interfaces with PulseAudio directly and writes its results to certain files.
 The scripts, written in lua and sh, read and interpret these files.
 
@@ -28,7 +28,7 @@ The scripts can do the following:
 	```
 - Run the daemon as a background process
 	```sh
-	./bin/pulsetest &
+	./bin/sinkmon &
 	```
 
 ## Related Reading

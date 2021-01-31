@@ -30,9 +30,9 @@ void write_sink_callback(pa_context *c, const pa_sink_info *i, int eol, void *us
 		FILE* file;
 
 		logpath_volume_length = strlen(logpath_cache)
-			+ strlen("/bin/pulsetest.sinks.") + digits + strlen(".volume") + 1;
+			+ strlen("/bin/sinkmon.sinks.") + digits + strlen(".volume") + 1;
 		logpath_volume = (char*) malloc(logpath_volume_length);
-		snprintf(logpath_volume, logpath_volume_length, "%s/bin/pulsetest.sinks.%d.volume", logpath_cache, i->index);
+		snprintf(logpath_volume, logpath_volume_length, "%s/bin/sinkmon.sinks.%d.volume", logpath_cache, i->index);
 		printf("[write_sink]\t%s\t<- %d\n", logpath_volume, volume);
 		file = fopen(logpath_volume, "w");
 		if (file) {
@@ -43,9 +43,9 @@ void write_sink_callback(pa_context *c, const pa_sink_info *i, int eol, void *us
 		}
 
 		logpath_mute_length = strlen(logpath_cache)
-			+ strlen("/bin/pulsetest.sinks.") + digits + strlen(".mute") + 1;
+			+ strlen("/bin/sinkmon.sinks.") + digits + strlen(".mute") + 1;
 		logpath_mute = (char*) malloc(logpath_mute_length);
-		snprintf(logpath_mute, logpath_mute_length, "%s/bin/pulsetest.sinks.%d.mute", logpath_cache, i->index);
+		snprintf(logpath_mute, logpath_mute_length, "%s/bin/sinkmon.sinks.%d.mute", logpath_cache, i->index);
 		printf("[write_sink]\t%s\t\t<- %d\n", logpath_mute, i->mute);
 		file = fopen(logpath_mute, "w");
 		if (file) {
@@ -79,9 +79,9 @@ void write_newest_sink_callback(pa_context *c, const pa_sink_info *i, int eol, v
 		char* logpath_cache = getenv("XDG_CACHE_HOME");
 		FILE* file;
 
-		logpath_newest_sink_length = strlen(logpath_cache) + strlen("/bin/pulsetest.newest_sink_index") + 1;
+		logpath_newest_sink_length = strlen(logpath_cache) + strlen("/bin/sinkmon.newest_sink_index") + 1;
 		logpath_newest_sink = (char*) malloc(logpath_newest_sink_length);
-		snprintf(logpath_newest_sink, logpath_newest_sink_length, "%s/bin/pulsetest.newest_sink_index", logpath_cache);
+		snprintf(logpath_newest_sink, logpath_newest_sink_length, "%s/bin/sinkmon.newest_sink_index", logpath_cache);
 		printf("[write_newest]\t%s\t<- %d\n", logpath_newest_sink, i->index);
 
 		file = fopen(logpath_newest_sink, "w");

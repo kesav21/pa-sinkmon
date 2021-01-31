@@ -26,10 +26,10 @@ local diff = tonumber(string.sub(arg[1], 1, -2))
 print('parsed ' .. diff)
 
 local cache = os.getenv("XDG_CACHE_HOME")
-local newest = tonumber(fileio.firstline(cache .. '/bin/pulsetest.newest_sink_index'))
+local newest = tonumber(fileio.firstline(cache .. '/bin/sinkmon.newest_sink_index'))
 print('newest sink ' .. newest)
 
-local currentpath = string.format("%s/bin/pulsetest.sinks.%s.volume", cache, newest)
+local currentpath = string.format("%s/bin/sinkmon.sinks.%s.volume", cache, newest)
 print('reading from ' .. currentpath)
 
 local current = tonumber(fileio.firstline(currentpath))

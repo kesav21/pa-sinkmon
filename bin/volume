@@ -34,15 +34,15 @@ local cache_var = "XDG_CACHE_HOME"
 debug('getting ' .. cache_var)
 local cache = getenv(cache_var)
 debug("cache is " .. cache)
-local newest_path = cache .. '/bin/pulsetest.newest_sink_index'
+local newest_path = cache .. '/bin/sinkmon.newest_sink_index'
 debug('reading from ' .. newest_path)
 local newest = tonumber(fileio.firstline(newest_path))
 debug('newest sink is ' .. newest)
-local mute_path = string.format('%s/bin/pulsetest.sinks.%s.mute', cache, newest)
+local mute_path = string.format('%s/bin/sinkmon.sinks.%s.mute', cache, newest)
 debug('reading from ' .. mute_path)
 local mute_icon = get_mute_icon(tonumber(fileio.firstline(mute_path)))
 debug('mute is ' .. mute_icon)
-local volume_path = string.format('%s/bin/pulsetest.sinks.%s.volume', cache, newest)
+local volume_path = string.format('%s/bin/sinkmon.sinks.%s.volume', cache, newest)
 debug('reading from ' .. volume_path)
 local volume = tonumber(fileio.firstline(volume_path))
 debug('volume is ' .. volume)
