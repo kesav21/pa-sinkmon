@@ -20,14 +20,20 @@ void write_sink_callback(pa_context *c, const pa_sink_info *i, int eol, void *us
 	if (i) {
 		// int pid;
 		int ret;
-		int digits = intlen(i->index);
-		int volume = round(100.0f * (float) pa_cvolume_avg(&(i->volume)) / (float) PA_VOLUME_NORM);
+		int digits;
+		int volume;
 		int logpath_volume_length;
 		int logpath_mute_length;
+		int logpath_description_length;
 		char* logpath_volume;
 		char* logpath_mute;
-		char* logpath_cache = getenv("XDG_CACHE_HOME");
+		char* logpath_description;
+		char* logpath_cache;
 		FILE* file;
+
+		digits = intlen(i->index);
+		volume = round(100.0f * (float) pa_cvolume_avg(&(i->volume)) / (float) PA_VOLUME_NORM);
+		logpath_cache = getenv("XDG_CACHE_HOME");
 
 		logpath_volume_length = strlen(logpath_cache)
 			+ strlen("/bin/sinkmon.sinks.") + digits + strlen(".volume") + 1;
@@ -55,6 +61,19 @@ void write_sink_callback(pa_context *c, const pa_sink_info *i, int eol, void *us
 			fprintf(stderr, "[write_sink]\tfailed writing to %s\n", logpath_mute);
 		}
 
+		logpath_description_length = strlen(logpath_cache)
+			+ strlen("/bin/sinkmon.sinks.") + digits + strlen(".description") + 1;
+		logpath_description = (char*) malloc(logpath_description_length);
+		snprintf(logpath_description, logpath_description_length, "%s/bin/sinkmon.sinks.%d.description", logpath_cache, i->index);
+		printf("[write_sink]\t%s\t\t<- %s\n", logpath_description, i->description);
+		file = fopen(logpath_description, "w");
+		if (file) {
+			fprintf(file, "%s\n", i->description);
+			fclose(file);
+		} else {
+			fprintf(stderr, "[write_sink]\tfailed writing to %s\n", logpath_description);
+		}
+
 		// pid = pidof("dwmblocks", 9);
 		// if (pid != -1) {
 		// 	printf("[write_sink]\tsignalling dwmblocks (%d)\n", pid);
@@ -76,8 +95,10 @@ void write_newest_sink_callback(pa_context *c, const pa_sink_info *i, int eol, v
 	if (i) {
 		int logpath_newest_sink_length;
 		char* logpath_newest_sink;
-		char* logpath_cache = getenv("XDG_CACHE_HOME");
+		char* logpath_cache;
 		FILE* file;
+
+		logpath_cache = getenv("XDG_CACHE_HOME");
 
 		logpath_newest_sink_length = strlen(logpath_cache) + strlen("/bin/sinkmon.newest_sink_index") + 1;
 		logpath_newest_sink = (char*) malloc(logpath_newest_sink_length);
