@@ -1,9 +1,9 @@
 
 # PulseAudio Sink Monitor
 
-This project contains a program and a collection of scripts I use to monitor the different sinks connected to my computer.
+This project contains a program I use to monitor the different sinks connected to my computer.
 The daemon, written in C, interfaces with PulseAudio directly and writes its results to certain files.
-The scripts, written in lua and sh, read and interpret these files.
+Then, scripts can be written to read and interpret these files.
 
 ## Daemon
 
@@ -13,13 +13,6 @@ The daemon is responsible for the following:
 - Notifying on sink change
 - Switching sink-inputs on sink change
 
-## Scripts
-
-The scripts can do the following:
-- [Set volume](chvol)
-- [Toggle mute](togglemute)
-- [Pretty-print volume and mute](volume)
-
 ## Usage
 
 - Compile the daemon
@@ -28,7 +21,11 @@ The scripts can do the following:
 	```
 - Run the daemon as a background process
 	```sh
-	./bin/sinkmon &
+	sinkmon &
+	```
+- Install the daemon (the default location is `~/.local/bin`)
+	```sh
+	make install
 	```
 
 ## Related Reading
